@@ -8,23 +8,23 @@
       <h3>Game Board</h3>
 
       <div class="player-row">
-        <div class="pit" v-for="(pit, index) in player1PitsReversed" :key="index" @click="makeMove(pit.pitIndex)">
-          <div>P1 {{ pit.pitIndex }}</div>
-          <div>{{ pit.noOfSeeds }}</div>
-        </div>
         <div class="store" v-if="player1Store">
           <div>P1 Store</div>
           <div>{{ player1Store.noOfSeeds }}</div>
         </div>
+        <div class="pit" v-for="(pit, index) in player1PitsReversed" :key="index" @click="makeMove(pit.pitIndex)">
+          <div>P1 {{ pit.pitIndex }}</div>
+          <div>{{ pit.noOfSeeds }}</div>
+        </div>
       </div>
       <div class="player-row">
-        <div class="store" v-if="player2Store">
-          <div>P2 Store</div>
-          <div>{{ player2Store.noOfSeeds }}</div>
-        </div>
         <div class="pit" v-for="(pit, index) in player2Pits" :key="index" @click="makeMove(pit.pitIndex)">
           <div>P2 {{ pit.pitIndex }}</div>
           <div>{{ pit.noOfSeeds }}</div>
+        </div>
+        <div class="store" v-if="player2Store">
+          <div>P2 Store</div>
+          <div>{{ player2Store.noOfSeeds }}</div>
         </div>
       </div>
     </div>
