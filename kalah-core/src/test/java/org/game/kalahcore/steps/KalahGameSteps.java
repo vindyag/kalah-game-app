@@ -33,9 +33,20 @@ public class KalahGameSteps {
         gameId = response.data();
         assertNotNull(gameId);
         assertEquals(ResponseStatus.SUCCESS, response.status());
-
     }
 
+    /*
+     *  Kalah New Game Board
+     *  ----------------
+     *  | 6 | 5 | 4 |  3 |  2 |  1 |  0 |
+     *  |(0)|(4)|(4)| (4)| (4)| (4)| (4)|
+     *  |---|---|---|----|----|----|----|
+     *  | 7 | 8 | 9 | 10 | 11 | 12 | 13 |
+     *  |(4)|(4)|(4)| (4)| (4)| (4)| (0)|
+     *  ----------------
+     *  Player 1's pits: 0 to 6 - store 6th
+     *  Player 2's pits: 7 to 13 - store 13th
+     */
     @Then("Game should reflect the initial game state")
     public void game_should_reflect_the_initial_game_state() {
         GameDTO game = gameService.loadGame(gameId);
@@ -60,6 +71,18 @@ public class KalahGameSteps {
         assertEquals(ResponseStatus.SUCCESS, response.status());
     }
 
+    /*
+     *  Kalah New Game Board
+     *  ----------------
+     *  | 6 | 5 | 4 |  3 |  2 |  1 |  0 |
+     *  |(0)|(5)|(5)| (5)| (5)| (5)| (0)|
+     *  |---|---|---|----|----|----|----|
+     *  | 7 | 8 | 9 | 10 | 11 | 12 | 13 |
+     *  |(4)|(4)|(4)| (4)| (4)| (4)| (0)|
+     *  ----------------
+     *  Player 1's pits: 0 to 6 - store 6th
+     *  Player 2's pits: 7 to 13 - store 13th
+     */
     @Then("Game should reflect the move")
     public void game_should_reflect_the_move() {
         GameDTO game = gameService.loadGame(gameId);
@@ -72,7 +95,7 @@ public class KalahGameSteps {
         assertEquals(5, (int) pits.get(sowingPitIndex+2).noOfSeeds());
         assertEquals(5, (int) pits.get(sowingPitIndex+3).noOfSeeds());
         assertEquals(5, (int) pits.get(sowingPitIndex+4).noOfSeeds());
-        assertEquals(4, (int) pits.get(sowingPitIndex+5).noOfSeeds());
+        assertEquals(0, (int) pits.get(sowingPitIndex+5).noOfSeeds());
     }
 
 }

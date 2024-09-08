@@ -24,7 +24,7 @@ class GameValidatorTest extends Specification {
         given: "A game where the current player is 1"
         def game = GameGenerationHelper.generateGame()
         when: "Player tries to sow using his Store"
-        def pitIndex = 0 // Store of player 1
+        def pitIndex = 6 // Store of player 1
         gameValidator.validateMove(game, pitIndex)
         then:
         final InvalidInputException ex = thrown(InvalidInputException.class)

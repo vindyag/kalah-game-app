@@ -22,7 +22,7 @@ public class GameValidator {
             throw new InvalidInputException("Selected Pit is a store");
         }
 
-        if (!Objects.equals(game.getNextPlayerId(), pit.getPlayerId())) { //check
+        if (!Objects.equals(game.getNextPlayerId(), pit.getPlayerId())) {
             throw new InvalidInputException("Selected Pit does not belong to the current player");
         }
     }

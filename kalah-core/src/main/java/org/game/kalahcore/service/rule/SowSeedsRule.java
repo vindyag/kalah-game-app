@@ -22,7 +22,7 @@ public class SowSeedsRule implements GameRule {
 
         while (seedCountToMove > 0) {
             sowingPit = pits.get(sowingPit.getNextPitIndex());
-            if(Boolean.TRUE.equals(sowingPit.isStore()) && !sowingPit.getPlayerId().equals(game.getCurrentPlayerId())) {
+            if(Boolean.TRUE.equals(sowingPit.isStore()) && !sowingPit.getPlayerId().equals(game.getNextPlayerId())) {
                 continue; // do not add seeds to other players store
             }
             sowingPit.setSeedCount(sowingPit.getSeedCount() + 1);

@@ -30,7 +30,7 @@ public class GameGenerationHelper {
     private static Pit generatePit(Integer index) {
         Pit pit = new Pit();
         pit.setPitIndex(index);
-        pit.setStore(index % 7 == 0);
+        pit.setStore(index == 6 || index == 13);
         if(Boolean.TRUE.equals(pit.isStore())) {
             pit.setSeedCount(0);
         } else {
