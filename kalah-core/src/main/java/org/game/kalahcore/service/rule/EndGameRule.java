@@ -23,6 +23,7 @@ public class EndGameRule implements GameRule {
     public Integer apply(Game game, Integer pitIndex) {
         game.setGameStatus(GameStatus.FINISHED);
         game.setWinnerPlayerId(game.getCurrentPlayerId());
+        game.setCurrentPlayerId(null);
         game.setNextPlayerId(null);
         return -1;
     }

@@ -17,9 +17,9 @@ public class ExtraTurnRule implements GameRule {
     @Override
     public Integer apply(Game game, Integer pitIndex) {
         Integer currentPitIndex = pitIndex;
-        do{
+        do {
             currentPitIndex = new SowSeedsRule().apply(game, currentPitIndex);
-        }while (this.isApplicable(game,pitIndex));
+        } while (this.isApplicable(game, currentPitIndex));
         return currentPitIndex;
     }
 }
