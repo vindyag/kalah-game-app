@@ -6,6 +6,10 @@ import spock.lang.Specification
 
 class SowSeedsRuleTest extends Specification{
 
+    static {
+        System.out.println(">>> SowSeedsRule Tests running");
+    }
+
     def "Player 1 Sow seeds on a fresh game"(){
         given:
             def sowSeedsRule = new SowSeedsRule()
@@ -16,7 +20,6 @@ class SowSeedsRuleTest extends Specification{
 
         then:
             assert result == 5
-
     }
 
 }

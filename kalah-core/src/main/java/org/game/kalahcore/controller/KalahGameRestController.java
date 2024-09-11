@@ -9,12 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static org.game.kalahcore.constants.AppConstants.URI_PREFIX;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping(URI_PREFIX)
+@RequestMapping("/api/v1/games")
 public class KalahGameRestController {
 
     private final KalahGameService kalahGameService;

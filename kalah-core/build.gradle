@@ -33,7 +33,26 @@ dependencies {
     testImplementation 'io.cucumber:cucumber-junit:7.0.0'
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
+sourceSets {
+    test {
+        resources {
+            srcDirs = ['src/test/groovy','src/test/features']
+        }
+    }
 }
 
+tasks.named('test') {
+    useJUnitPlatform()
+    dependsOn cucumber
+}
+
+tasks.register('cucumber', JavaExec) {
+    dependsOn assemble, compileTestJava
+    mainClass = 'io.cucumber.core.cli.Main'
+    classpath = sourceSets.test.runtimeClasspath
+    args = ['--plugin', 'pretty', '--glue', 'org.game.kalahcore', 'src/test/resources/features']
+}
+
+apply plugin: "application"
+
+mainClassName = "org.game.kalahcore.CucumberIntegrationTest"

@@ -7,6 +7,10 @@ import spock.lang.Specification
 
 class GameValidatorTest extends Specification {
 
+    static {
+        System.out.println(">>> GameValidatorTest Tests running");
+    }
+
     def gameValidator = new GameValidator()
 
     def "Validate Pit Index is a valid index on Move "() {

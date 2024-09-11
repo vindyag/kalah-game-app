@@ -10,8 +10,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 @CucumberContextConfiguration
 @CucumberOptions(
         features = "src/test/resources/features",
-        glue = "org.game.kalahcore"
+        glue = "org.game.kalahcore.steps"
 )
 @SpringBootTest(classes = KalahCoreApplication.class)
 public class CucumberIntegrationTest {
+
+    static {
+        System.out.println(">>> Cucumber Tests Running");
+    }
 }
