@@ -49,7 +49,8 @@ public class KalahGameSteps {
      */
     @Then("Game should reflect the initial game state")
     public void game_should_reflect_the_initial_game_state() {
-        GameDTO game = gameService.loadGame(gameId);
+        ApiResponse<GameDTO> response = gameService.loadGame(gameId);
+        GameDTO game = response.data();
         assertNotNull(game);
         assertNotNull(game.gameId());
         assertEquals(GameStatus.NOT_STARTED, game.gameStatus());
@@ -85,7 +86,8 @@ public class KalahGameSteps {
      */
     @Then("Game should reflect the move")
     public void game_should_reflect_the_move() {
-        GameDTO game = gameService.loadGame(gameId);
+        ApiResponse<GameDTO> response = gameService.loadGame(gameId);
+        GameDTO game = response.data();
         assertNotNull(game);
         assertNotNull(game.gameId());
         assertEquals(GameStatus.IN_PROGRESS, game.gameStatus());
