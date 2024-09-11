@@ -39,10 +39,10 @@ public class KalahGameService {
     }
 
 
-    public GameDTO loadGame(Long gameId) {
+    public ApiResponse<GameDTO> loadGame(Long gameId) {
         Optional<Game> gameOptional = gameRepository.findById(gameId);
         if (gameOptional.isPresent()) {
-            return getGameGTO(gameOptional.get());
+            return new ApiResponse<>(ResponseStatus.SUCCESS, getGameGTO(gameOptional.get()), null);
         }
         else {
             throw new InvalidInputException("Game not found");
