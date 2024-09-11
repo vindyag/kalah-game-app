@@ -3,14 +3,12 @@ package org.game.kalahcore.service.helper;
 import org.game.kalahcore.constants.GameStatus;
 import org.game.kalahcore.model.Game;
 import org.game.kalahcore.model.Pit;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.game.kalahcore.constants.AppConstants.*;
 
-@Service
 public class GameGenerationHelper {
 
     public static Game generateGame() {
