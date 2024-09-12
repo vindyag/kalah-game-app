@@ -36,7 +36,7 @@ dependencies {
 sourceSets {
     test {
         resources {
-            srcDirs = ['src/test/groovy','src/test/features']
+            srcDirs = ['src/test/groovy','src/test/resources/features']
         }
     }
 }
@@ -52,7 +52,3 @@ tasks.register('cucumber', JavaExec) {
     classpath = sourceSets.test.runtimeClasspath
     args = ['--plugin', 'pretty', '--glue', 'org.game.kalahcore', 'src/test/resources/features']
 }
-
-apply plugin: "application"
-
-mainClassName = "org.game.kalahcore.CucumberIntegrationTest"
