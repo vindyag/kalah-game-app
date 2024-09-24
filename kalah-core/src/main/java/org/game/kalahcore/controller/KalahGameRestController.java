@@ -1,5 +1,7 @@
 package org.game.kalahcore.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.game.kalahcore.dto.ApiResponse;
 import org.game.kalahcore.dto.GameDTO;
 import org.game.kalahcore.service.KalahGameService;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+@Tag(name = "Kalah Game API")
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1/games")
@@ -22,6 +25,7 @@ public class KalahGameRestController {
         this.kalahGameService = kalahGameService;
     }
 
+    @Operation(summary = "Start a new Game")
     @PostMapping
     public ResponseEntity<EntityModel<ApiResponse<Long>>> startGame() {
 
@@ -33,6 +37,7 @@ public class KalahGameRestController {
         return ResponseEntity.status(HttpStatus.CREATED).body(resource);
     }
 
+    @Operation(summary = "Retrieve exiting Game by ID")
     @GetMapping("/{gameId}")
     public ResponseEntity<EntityModel<ApiResponse<GameDTO>>> loadGame(@PathVariable Long gameId) {
 
@@ -45,6 +50,7 @@ public class KalahGameRestController {
         return ResponseEntity.ok(resource);
     }
 
+    @Operation(summary = "Move seeds from a Pit in a Game")
     @PatchMapping("/{gameId}/pits/{pitIndex}")
     public ResponseEntity<EntityModel<ApiResponse<GameDTO>>> chosePit(@PathVariable Long gameId, @PathVariable Integer pitIndex) {
 
