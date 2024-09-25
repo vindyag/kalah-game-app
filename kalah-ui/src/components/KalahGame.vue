@@ -28,17 +28,21 @@
         </div>
       </div>
     </div>
+
+    <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
+
   </div>
 </template>
 
 <script>
-import {createNewGame, fetchGameData, makeMove} from '../services/http';
+import {createNewGame, fetchGameData, makeMove} from '@/services/http';
 
 export default {
   data() {
     return {
       gameId: null,
       gameData: null,
+      errorMessage: null,
     };
   },
   computed: {
@@ -60,34 +64,48 @@ export default {
   },
   methods: {
     async startGame() {
-      try {
-        const response = await createNewGame();
-        this.gameId = response.data.data;
-        await this.getGameData();
-      } catch (error) {
-        console.error('Error starting game:', error);
+
+      const [data, error] = await createNewGame();
+
+      if (error) {
+        console.log(error)
+        this.errorMessage = 'Error creating game';
       }
+      if (data) {
+        console.log(data.data);
+        this.gameId = data.data;
+      }
+
+      await this.getGameData();
+
     },
     async getGameData() {
-      try {
-        if (this.gameId) {
-          const response = await fetchGameData(this.gameId);
-          this.gameData = response.data; // Store the game state
-          console.log('Game Data:', this.gameData); // Verify game data
+      if (this.gameId) {
+        const [data, error] = await fetchGameData(this.gameId);
+        if (error) {
+          console.log(error)
+          this.errorMessage = 'Error fetching game data';
         }
-      } catch (error) {
-        console.error('Error fetching game data:', error);
+        if (data) {
+          console.log(data.data);
+          this.gameData = data.data;
+          this.errorMessage = undefined;
+        }
       }
     },
     async makeMove(pitIndex) {
-      try {
-        if (this.gameId) {
-          const response = await makeMove(this.gameId, pitIndex);
-          console.log(response.data)
-          this.gameData = response.data.data;
+      if (this.gameId) {
+        const [data, error] = await makeMove(this.gameId, pitIndex);
+
+        if (error) {
+          console.log(error)
+          this.errorMessage = 'Error making move';
         }
-      } catch (error) {
-        console.error('Error making move:', error);
+        if (data) {
+          console.log(data.data);
+          this.gameData = data.data;
+          this.errorMessage = undefined;
+        }
       }
     }
   },
@@ -99,14 +117,18 @@ export default {
   font-family: Arial, sans-serif;
   text-align: center;
   margin-top: 50px;
-
 }
 
 .start-button {
   padding: 20px 25px;
   background-color: silver;
   border: 0.5px solid #000;
-  font-size:  15px;
+  font-size: 15px;
+}
+
+.error-message {
+  color: red;
+  margin-top: 20px;
 }
 
 .game-board {
